@@ -3,7 +3,6 @@ import { LandingScreen } from "./components/LandingScreen";
 import { SetupScreen } from "./components/SetupScreen";
 import { PlayerList } from "./components/PlayerList";
 import { PlayerDetails } from "./components/PlayerDetails";
-import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 import { useGameStore } from "./store/gameStore";
 import { useLocalStorage } from "./utils/useLocalStorage";
 import { Analytics } from "@vercel/analytics/react";
@@ -71,8 +70,6 @@ function App() {
             onEliminate={handleBackToPlayerList}
           />
         )}
-
-        <PWAInstallPrompt />
       </div>
       <Analytics />
     </>
