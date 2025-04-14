@@ -1,56 +1,11 @@
 import { Player, GameState, Mission } from "../models/types";
+import { MISSION_LIST } from "./missions";
 
 /**
  * Génère une liste de missions pour le jeu
  */
 export const generateMissions = (): Mission[] => {
-  return [
-    {
-      id: "1",
-      description: "Faire porter quelque chose de ridicule à la cible",
-    },
-    { id: "2", description: "Faire chanter la cible" },
-    {
-      id: "3",
-      description: "Faire danser la cible pendant au moins 10 secondes",
-    },
-    {
-      id: "4",
-      description: "Faire dire à la cible 'Je suis un pingouin' trois fois",
-    },
-    {
-      id: "5",
-      description: "Faire prendre une pose ridicule à la cible pour une photo",
-    },
-    { id: "6", description: "Faire imiter un animal à la cible" },
-    { id: "7", description: "Faire raconter une blague à la cible" },
-    { id: "8", description: "Faire faire 10 sauts à la cible" },
-    { id: "9", description: "Faire réciter l'alphabet à l'envers à la cible" },
-    {
-      id: "10",
-      description: "Faire tenir la cible sur un pied pendant 30 secondes",
-    },
-    {
-      id: "11",
-      description: "Faire dessiner un portrait de toi les yeux fermés",
-    },
-    {
-      id: "12",
-      description: "Faire complimenter 3 personnes différentes en 2 minutes",
-    },
-    {
-      id: "13",
-      description: "Faire porter tes chaussures à ta cible pendant 5 minutes",
-    },
-    {
-      id: "14",
-      description: "Faire parler avec un accent étranger pendant 5 minutes",
-    },
-    {
-      id: "15",
-      description: "Faire manger une combinaison d'aliments étrange",
-    },
-  ];
+  return MISSION_LIST;
 };
 
 /**
