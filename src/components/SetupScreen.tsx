@@ -83,16 +83,17 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
       </div>
 
       {/* Main content with scroll */}
-      <div className="flex-1 overflow-y-auto p-4 bg-white">
-        <div className="mb-6">
-          <h2 className="text-xl font-medium mb-3">
-            Joueurs ({players.length})
-          </h2>
-          {players.length === 0 ? (
-            <p className="text-gray-500 italic text-center py-4">
+      <div className="flex-1 overflow-y-auto p-4 bg-white flex flex-col">
+        <h2 className="text-xl font-medium mb-3">Joueurs ({players.length})</h2>
+        <div className="flex-1 overflow-y-auto flex justify-center items-center">
+          {players.length === 0 && (
+            <p className="text-gray-500 italic text-center py-4 ">
               Aucun joueur ajouté
             </p>
-          ) : (
+          )}
+        </div>
+        <div className="mb-6">
+          {players.length !== 0 && (
             <ul className="bg-gray-50 rounded-lg divide-y divide-gray-100 overflow-hidden shadow-sm">
               {players.map((player) => (
                 <li
