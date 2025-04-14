@@ -4,11 +4,15 @@ import { SetupScreen } from "./components/SetupScreen";
 import { PlayerList } from "./components/PlayerList";
 import { PlayerDetails } from "./components/PlayerDetails";
 import { useGameStore } from "./store/gameStore";
+import { useLocalStorage } from "./utils/useLocalStorage";
 
 type AppScreen = "landing" | "setup" | "player-list" | "player-details";
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<AppScreen>("landing");
+  const [currentScreen, setCurrentScreen] = useLocalStorage<AppScreen>(
+    "currentScreen",
+    "landing"
+  );
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
 
   const { resetGame, setStatus } = useGameStore();

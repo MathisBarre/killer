@@ -196,7 +196,10 @@ export const PlayerDetails = ({
 
           <div className="mt-auto">
             <Button
-              onClick={() => setShowDetails(false)}
+              onClick={() => {
+                setShowDetails(false);
+                onBack();
+              }}
               variant="secondary"
               fullWidth
             >
