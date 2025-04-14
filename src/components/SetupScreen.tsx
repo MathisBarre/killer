@@ -67,10 +67,10 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
   return (
     <FullScreenContainer>
       {/* Header */}
-      <div className="p-4 border-b">
+      <div className="p-4 bg-gray-50 shadow-sm relative">
         <button
           onClick={onBack}
-          className="text-gray-600 hover:text-gray-800 flex items-center gap-2"
+          className="text-gray-600 hover:text-gray-800 flex items-center gap-2 absolute top-1/2 -translate-y-1/2 left-4 bg-white rounded-full p-2"
           aria-label="Retour"
         >
           <ArrowLeftIcon className="h-5 w-5" />
@@ -81,7 +81,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
       </div>
 
       {/* Main content with scroll */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4 bg-white">
         <div className="mb-6">
           <h2 className="text-xl font-medium mb-3">
             Joueurs ({players.length})
@@ -91,16 +91,16 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
               Aucun joueur ajouté
             </p>
           ) : (
-            <ul className="border rounded-lg divide-y overflow-hidden">
+            <ul className="bg-gray-50 rounded-lg divide-y divide-gray-100 overflow-hidden shadow-sm">
               {players.map((player) => (
                 <li
                   key={player.id}
-                  className="flex justify-between items-center p-3 hover:bg-gray-50"
+                  className="flex justify-between items-center p-3 hover:bg-gray-100 transition-colors"
                 >
                   <span>{player.name}</span>
                   <button
                     onClick={() => handleRemovePlayer(player.id)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors"
                     aria-label="Supprimer"
                   >
                     ✕
@@ -113,7 +113,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
       </div>
 
       {/* Fixed footer with actions */}
-      <div className="p-4 border-t bg-white">
+      <div className="p-4 bg-gray-50 shadow-sm">
         <div className="flex flex-col gap-3">
           <TextField
             label="Nom du joueur"
@@ -122,13 +122,13 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
             onKeyDown={handleKeyPress}
             placeholder="Ex: Inspecteur shadow"
             error={errorMessage}
-            className="flex-1"
+            className="flex-1 bg-white"
           />
           <Button
             onClick={handleAddPlayer}
             variant="secondary"
             fullWidth
-            className="flex items-center justify-center"
+            className="flex items-center justify-center bg-white hover:bg-gray-50 shadow-sm"
           >
             <PlusIcon className="h-5 w-5 mr-2" />
             Ajouter un joueur
@@ -137,7 +137,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
             onClick={handleStartGame}
             disabled={players.length < 2}
             fullWidth
-            className="flex items-center justify-center"
+            className="flex items-center justify-center shadow-sm"
           >
             <PlayIcon className="h-5 w-5 mr-2" />
             Commencer la partie
