@@ -37,6 +37,26 @@ export const LandingScreen = ({ onStartGame }: LandingScreenProps) => {
           </motion.p>
 
           <motion.div
+            className="flex flex-col items-center space-y-2 mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <p className="text-gray-600 flex items-center">
+              <span className="text-green-500 mr-2">✓</span>
+              Fonctionne hors-ligne
+            </p>
+            <p className="text-gray-600 flex items-center">
+              <span className="text-green-500 mr-2">✓</span>
+              Un seul téléphone
+            </p>
+            <p className="text-gray-600 flex items-center">
+              <span className="text-green-500 mr-2">✓</span>
+              Sauvegarde automatique
+            </p>
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
