@@ -1,7 +1,7 @@
 import { FullScreenContainer } from "./FullScreenContainer";
 import { Button } from "./Button";
 import { useGameStore } from "../store/gameStore";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, PlusIcon, StopIcon } from "@heroicons/react/16/solid";
 
 interface PlayerListProps {
   onSelectPlayer: (playerId: string) => void;
@@ -27,12 +27,32 @@ export const PlayerList = ({
       <div className="p-4 bg-gray-50 shadow-sm relative">
         <button
           onClick={onBack}
-          className="text-gray-600 hover:text-gray-800 flex items-center gap-2 absolute top-1/2 -translate-y-1/2 left-4 bg-white rounded-full p-2"
+          className="text-gray-600 hover:text-gray-800 flex items-center gap-2 absolute top-1/2 -translate-y-1/2 left-4 bg-white rounded-full p-2 shadow-sm"
           aria-label="Retour"
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
-        <h1 className="text-2xl font-bold text-center mt-2">Joueurs</h1>
+        <h1 className="text-2xl font-bold text-center">Joueurs</h1>
+
+        {!isGameCompleted && (
+          <button
+            onClick={() => {
+              if (
+                window.confirm(
+                  "Êtes-vous sûr de vouloir arrêter la partie ? Toute progression sera perdue."
+                )
+              ) {
+                onResetGame();
+              }
+            }}
+            className="flex items-center absolute top-1/2 -translate-y-1/2 right-4 bg-red-600 text-white hover:bg-red-700 active:bg-red-800 p-2 rounded-full gap-2"
+          >
+            <>
+              <StopIcon className="h-5 w-5" />
+              <span className="text-sm mr-1">Stop</span>
+            </>
+          </button>
+        )}
       </div>
 
       {/* Main content with scroll */}
@@ -93,28 +113,23 @@ export const PlayerList = ({
       </div>
 
       {/* Fixed footer with actions */}
-      <div className="p-4 bg-gray-50 shadow-sm">
-        <Button
-          onClick={() => {
-            if (isGameCompleted) {
-              return onResetGame();
-            }
-
-            if (
-              window.confirm(
-                "Êtes-vous sûr de vouloir arrêter la partie ? Toute progression sera perdue."
-              )
-            ) {
-              onResetGame();
-            }
-          }}
-          variant="danger"
-          fullWidth
-          className="flex items-center justify-center shadow-sm"
-        >
-          {isGameCompleted ? "Nouvelle partie" : "Arrêter la partie"}
-        </Button>
-      </div>
+      {isGameCompleted && (
+        <div className="p-4 bg-gray-50 shadow-sm">
+          <Button
+            onClick={() => {
+              if (isGameCompleted) {
+                return onResetGame();
+              }
+            }}
+            variant="primary"
+            fullWidth
+            className="flex items-center justify-center shadow-sm"
+          >
+            <PlusIcon className="h-5 w-5 mr-2" />
+            Nouvelle partie
+          </Button>
+        </div>
+      )}
     </FullScreenContainer>
   );
 };

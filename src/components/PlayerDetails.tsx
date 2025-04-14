@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { useGameStore } from "../store/gameStore";
 import { canCounterKill } from "../core/gameLogic";
 import { Player } from "../models/types";
+import { FullScreenContainer } from "./FullScreenContainer";
 
 interface PlayerDetailsProps {
   playerId: string;
@@ -75,7 +76,7 @@ export const PlayerDetails = ({
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <FullScreenContainer>
       {!showDetails ? (
         // Vue: boutons de choix
         <div className="flex flex-col h-full">
@@ -208,6 +209,6 @@ export const PlayerDetails = ({
           </div>
         </Container>
       )}
-    </div>
+    </FullScreenContainer>
   );
 };

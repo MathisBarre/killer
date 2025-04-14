@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { TextField } from "./TextField";
 import { useGameStore } from "../store/gameStore";
 import { FullScreenContainer } from "./FullScreenContainer";
-import { ArrowLeftIcon, PlusIcon, PlayIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, PlusIcon, PlayIcon } from "@heroicons/react/16/solid";
 
 interface SetupScreenProps {
   onStartGame: () => void;
@@ -77,9 +77,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
         >
           <ArrowLeftIcon className="h-5 w-5" />
         </button>
-        <h1 className="text-2xl font-bold text-center mt-2">
-          Configuration du jeu
-        </h1>
+        <h1 className="text-2xl font-bold text-center">Configuration du jeu</h1>
       </div>
 
       {/* Main content with scroll */}
