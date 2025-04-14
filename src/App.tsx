@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { LandingScreen } from "./components/LandingScreen";
+import { SetupScreen } from "./components/SetupScreen";
+import { PlayerList } from "./components/PlayerList";
+import { PlayerDetails } from "./components/PlayerDetails";
+import { useGameStore } from "./store/gameStore";
+
+type AppScreen = "landing" | "setup" | "player-list" | "player-details";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentScreen, setCurrentScreen] = useState<AppScreen>("landing");
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+
+  const { resetGame, setStatus } = useGameStore();
+
+  const handleStartGame = () => {
+    setCurrentScreen("setup");
+    setStatus("setup");
+  };
+
+  const handleSetupComplete = () => {
+    setCurrentScreen("player-list");
+  };
+
+  const handleSelectPlayer = (playerId: string) => {
+    setSelectedPlayerId(playerId);
+    setCurrentScreen("player-details");
+  };
+
+  const handleBackToPlayerList = () => {
+    setSelectedPlayerId(null);
+    setCurrentScreen("player-list");
+  };
+
+  const handleResetGame = () => {
+    resetGame();
+    setCurrentScreen("landing");
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="bg-white min-h-screen text-gray-900">
+      {currentScreen === "landing" && (
+        <LandingScreen onStartGame={handleStartGame} />
+      )}
+
+      {currentScreen === "setup" && (
+        <SetupScreen
+          onStartGame={handleSetupComplete}
+          onBack={() => setCurrentScreen("landing")}
+        />
+      )}
+
+      {currentScreen === "player-list" && (
+        <PlayerList
+          onSelectPlayer={handleSelectPlayer}
+          onResetGame={handleResetGame}
+        />
+      )}
+
+      {currentScreen === "player-details" && selectedPlayerId && (
+        <PlayerDetails
+          playerId={selectedPlayerId}
+          onBack={handleBackToPlayerList}
+          onEliminate={handleBackToPlayerList}
+        />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
