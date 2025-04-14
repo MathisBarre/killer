@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "./Button";
 import { TextField } from "./TextField";
 import { useGameStore } from "../store/gameStore";
@@ -13,6 +13,7 @@ interface SetupScreenProps {
 export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
   const [playerName, setPlayerName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { players, addPlayer, removePlayer, startGame } = useGameStore();
 
@@ -32,6 +33,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
     addPlayer(trimmedName);
     setPlayerName("");
     setErrorMessage("");
+    inputRef.current?.focus();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -116,6 +118,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
       <div className="p-4 bg-gray-50 shadow-sm">
         <div className="flex flex-col gap-3">
           <TextField
+            ref={inputRef}
             label="Nom du joueur"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
