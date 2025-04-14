@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+- utilise yarn pour installer
+- les composants sont dans src/components
+- la logique est dans src/core
+- les types dans src/models
+- les store dans src/store
+- les utilitaire dans src/utils
+- l'application est une appplication vite.js, PAS next.js
