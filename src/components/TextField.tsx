@@ -15,7 +15,7 @@ export const TextField = ({
   const inputId = id || `input-${Math.random().toString(36).substring(2, 9)}`;
 
   return (
-    <div className="mb-4">
+    <div>
       {label && (
         <label
           htmlFor={inputId}
