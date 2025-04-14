@@ -146,7 +146,7 @@ export const eliminateTarget = (
   const eliminator = players.find((p) => p.id === eliminatorId);
   const target = players.find((p) => p.id === targetId);
 
-  if (!eliminator || !target || eliminator.targetId !== targetId) {
+  if (!eliminator || !target) {
     return players; // Impossible d'éliminer
   }
 
