@@ -1,6 +1,7 @@
 import { Button } from "./Button";
 import { Container } from "./Container";
 import { motion } from "framer-motion";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 interface LandingScreenProps {
   onStartGame: () => void;
@@ -8,14 +9,14 @@ interface LandingScreenProps {
 
 export const LandingScreen = ({ onStartGame }: LandingScreenProps) => {
   return (
-    <Container className="flex flex-col items-center justify-center text-center bg-gradient-to-b from-blue-50 to-white">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-6xl mx-auto"
-      >
-        <div className="flex flex-col items-center my-24">
+    <div className="flex flex-col">
+      <div className="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-b from-blue-50 to-white">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto px-4 mb-20"
+        >
           <motion.h1
             className="text-5xl text-balance font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
             initial={{ scale: 0.9 }}
@@ -26,7 +27,7 @@ export const LandingScreen = ({ onStartGame }: LandingScreenProps) => {
           </motion.h1>
 
           <motion.p
-            className="text-xl mb-12 text-gray-700 max-w-xl"
+            className="text-xl mb-12 text-gray-700 max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -47,12 +48,27 @@ export const LandingScreen = ({ onStartGame }: LandingScreenProps) => {
               Commencer une partie
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-0 flex flex-col items-center cursor-pointer"
+          onClick={() =>
+            window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+          }
+        >
+          <p className="text-gray-600 mb-2">Règles</p>
+          <ChevronDownIcon className="h-6 w-6 text-gray-600 animate-bounce" />
+        </motion.div>
+      </div>
+
+      <Container className="">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto text-left"
         >
           <h2 className="font-bold text-2xl mb-6 text-gray-800">
@@ -119,7 +135,7 @@ export const LandingScreen = ({ onStartGame }: LandingScreenProps) => {
             </motion.li>
           </ul>
         </motion.div>
-      </motion.div>
-    </Container>
+      </Container>
+    </div>
   );
 };
