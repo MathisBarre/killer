@@ -5,6 +5,7 @@ import { PlayerList } from "./components/PlayerList";
 import { PlayerDetails } from "./components/PlayerDetails";
 import { useGameStore } from "./store/gameStore";
 import { useLocalStorage } from "./utils/useLocalStorage";
+import { Analytics } from "@vercel/analytics/react";
 
 type AppScreen = "landing" | "setup" | "player-list" | "player-details";
 
@@ -42,33 +43,36 @@ function App() {
   };
 
   return (
-    <div className="bg-white min-h-screen text-gray-900">
-      {currentScreen === "landing" && (
-        <LandingScreen onStartGame={handleStartGame} />
-      )}
+    <>
+      <div className="bg-white min-h-screen text-gray-900">
+        {currentScreen === "landing" && (
+          <LandingScreen onStartGame={handleStartGame} />
+        )}
 
-      {currentScreen === "setup" && (
-        <SetupScreen
-          onStartGame={handleSetupComplete}
-          onBack={() => setCurrentScreen("landing")}
-        />
-      )}
+        {currentScreen === "setup" && (
+          <SetupScreen
+            onStartGame={handleSetupComplete}
+            onBack={() => setCurrentScreen("landing")}
+          />
+        )}
 
-      {currentScreen === "player-list" && (
-        <PlayerList
-          onSelectPlayer={handleSelectPlayer}
-          onResetGame={handleResetGame}
-        />
-      )}
+        {currentScreen === "player-list" && (
+          <PlayerList
+            onSelectPlayer={handleSelectPlayer}
+            onResetGame={handleResetGame}
+          />
+        )}
 
-      {currentScreen === "player-details" && selectedPlayerId && (
-        <PlayerDetails
-          playerId={selectedPlayerId}
-          onBack={handleBackToPlayerList}
-          onEliminate={handleBackToPlayerList}
-        />
-      )}
-    </div>
+        {currentScreen === "player-details" && selectedPlayerId && (
+          <PlayerDetails
+            playerId={selectedPlayerId}
+            onBack={handleBackToPlayerList}
+            onEliminate={handleBackToPlayerList}
+          />
+        )}
+      </div>
+      <Analytics />
+    </>
   );
 }
 
