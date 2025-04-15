@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { LandingScreen } from "./components/LandingScreen";
 import { SetupScreen } from "./components/SetupScreen";
 import { PlayerList } from "./components/PlayerList";
@@ -14,7 +13,10 @@ function App() {
     "currentScreen",
     "landing"
   );
-  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+
+  const [selectedPlayerId, setSelectedPlayerId] = useLocalStorage<
+    string | null
+  >("selectedPlayerId", null);
 
   const { resetGame, setStatus } = useGameStore();
 

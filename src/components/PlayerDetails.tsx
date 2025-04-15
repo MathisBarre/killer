@@ -103,7 +103,7 @@ export const PlayerDetails = ({
         </div>
       ) : (
         // Vue: détails du joueur
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col p-4">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2">{player.name}</h1>
             <p className="text-gray-500">
@@ -151,8 +151,8 @@ export const PlayerDetails = ({
                 <h2 className="text-xl font-medium mb-3">Contre-assassinat</h2>
                 <div className="bg-yellow-50 p-4 rounded-lg mb-3">
                   <p className="mb-2">
-                    Si quelqu'un tente de vous éliminer, vous pouvez le
-                    contre-assassiner en accomplissant votre mission sur lui.
+                    Si quelqu'un tente de vous éliminer, vous pouvez essayer de
+                    le contre-assassiner en devinant sa mission.
                   </p>
 
                   {player.lastCounterKillTime && !canCounterKill(player) ? (
@@ -169,7 +169,9 @@ export const PlayerDetails = ({
 
                 {player.mission && (
                   <div className="space-y-2">
-                    <p className="font-medium">Qui tente de vous éliminer ?</p>
+                    <p className="font-medium">
+                      Qui avez-vous contre-assassiné ?
+                    </p>
                     <div className="grid grid-cols-2 gap-2">
                       {players
                         .filter(
