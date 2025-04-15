@@ -13,8 +13,10 @@ export const FullScreenContainer = ({
     <div
       className={`fixed inset-0 flex flex-col ${className}`}
       style={{
-        // Utilisation de la hauteur dynamique pour éviter les problèmes avec la barre d'adresse mobile
-        height: "100dvh",
+        // Use min-height to ensure the container is at least the viewport height
+        // but can grow larger if content requires it
+        minHeight: "100dvh",
+        height: "auto",
       }}
     >
       {children}
