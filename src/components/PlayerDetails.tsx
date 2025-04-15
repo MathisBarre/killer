@@ -103,7 +103,7 @@ export const PlayerDetails = ({
         </div>
       ) : (
         // Vue: détails du joueur
-        <Container className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2">{player.name}</h1>
             <p className="text-gray-500">
@@ -207,7 +207,7 @@ export const PlayerDetails = ({
               Cacher mes informations
             </Button>
           </div>
-        </Container>
+        </div>
       )}
     </FullScreenContainer>
   );
