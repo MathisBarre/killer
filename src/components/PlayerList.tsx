@@ -95,9 +95,12 @@ export const PlayerList = ({
             </h2>
             <ul className="bg-gray-50 rounded-lg divide-y divide-gray-100 overflow-hidden shadow-sm opacity-60">
               {eliminatedPlayers.map((player) => (
-                <li key={player.id} className="p-3">
+                <li key={player.id} className="p-3 flex justify-between">
                   <span className="font-medium line-through">
                     {player.name}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {player.killCount > 0 && `Kills: ${player.killCount}`}
                   </span>
                 </li>
               ))}
