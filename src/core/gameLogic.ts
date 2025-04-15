@@ -20,6 +20,7 @@ export const createPlayer = (name: string): Player => {
     isEliminated: false,
     lastCounterKillTime: null,
     missionChangesCount: 0,
+    killCount: 0,
   };
 };
 
@@ -202,6 +203,38 @@ export const initializeGame = (playerNames: string[]): GameState => {
 };
 
 /**
+ * Check if a player can change their mission
+ */
+export const canChangeMission = (player: Player): boolean => {
+  return (
+    !player.isEliminated &&
+    player.missionChangesCount < 2 &&
+    player.killCount === 0
+  );
+};
+
+/**
+ * Get available missions for a player
+ */
+const getAvailableMissions = (
+  players: Player[],
+  currentPlayer: Player,
+  missions: Mission[]
+): Mission[] => {
+  // Get missions already assigned to other players
+  const assignedMissions = players
+    .filter((p) => p.id !== currentPlayer.id && p.mission)
+    .map((p) => p.mission);
+
+  // Filter out current mission and already assigned missions
+  return missions.filter(
+    (m) =>
+      m.description !== currentPlayer.mission &&
+      !assignedMissions.includes(m.description)
+  );
+};
+
+/**
  * Change a player's mission if allowed
  * @returns updated players array if mission was changed, null otherwise
  */
@@ -211,14 +244,12 @@ export const changeMission = (
   missions: Mission[]
 ): Player[] | null => {
   const player = players.find((p) => p.id === playerId);
-  if (!player || player.isEliminated || player.missionChangesCount >= 2) {
+  if (!player || !canChangeMission(player)) {
     return null;
   }
 
-  // Find a new random mission that's different from the current one
-  const availableMissions = missions.filter(
-    (m) => m.description !== player.mission
-  );
+  // Get available missions
+  const availableMissions = getAvailableMissions(players, player, missions);
   if (availableMissions.length === 0) {
     return null;
   }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container } from "./Container";
 import { Button } from "./Button";
 import { useGameStore } from "../store/gameStore";
-import { canCounterKill } from "../core/gameLogic";
+import { canCounterKill, canChangeMission } from "../core/gameLogic";
 import { Player } from "../models/types";
 import { FullScreenContainer } from "./FullScreenContainer";
 
@@ -130,7 +130,7 @@ export const PlayerDetails = ({
                 {player.mission ? (
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p>{player.mission}</p>
-                    {!player.isEliminated && player.missionChangesCount < 2 && (
+                    {canChangeMission(player) && (
                       <div className="mt-4">
                         <Button
                           onClick={() => {

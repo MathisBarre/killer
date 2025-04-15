@@ -88,6 +88,9 @@ export const PlayerList = ({
                   onClick={() => onSelectPlayer(player.id)}
                 >
                   <span className="font-medium">{player.name}</span>
+                  <span className="text-sm text-gray-500">
+                    {player.killCount > 0 && `Kills: ${player.killCount}`}
+                  </span>
                 </li>
               ))}
             </ul>

@@ -8,6 +8,8 @@ import {
   checkGameCompletion,
   initializeGame,
   generateMissions,
+  canChangeMission,
+  changeMission,
 } from "./gameLogic";
 import { Player } from "../models/types";
 
@@ -32,6 +34,8 @@ describe("Game Logic", () => {
         mission: null,
         isEliminated: false,
         lastCounterKillTime: null,
+        missionChangesCount: 0,
+        killCount: 0,
       });
     });
   });
@@ -46,6 +50,8 @@ describe("Game Logic", () => {
           mission: null,
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -54,6 +60,8 @@ describe("Game Logic", () => {
           mission: null,
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-3",
@@ -62,6 +70,8 @@ describe("Game Logic", () => {
           mission: null,
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -103,6 +113,8 @@ describe("Game Logic", () => {
           mission: "Mission A",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -111,6 +123,8 @@ describe("Game Logic", () => {
           mission: "Mission B",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-3",
@@ -119,6 +133,8 @@ describe("Game Logic", () => {
           mission: "Mission C",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -131,6 +147,7 @@ describe("Game Logic", () => {
       const eliminator = result.find((p) => p.id === "player-1");
       expect(eliminator?.targetId).toBe("player-3");
       expect(eliminator?.mission).toBe("Mission B");
+      expect(eliminator?.killCount).toBe(1);
     });
   });
 
@@ -143,6 +160,8 @@ describe("Game Logic", () => {
         mission: "Mission A",
         isEliminated: false,
         lastCounterKillTime: null,
+        missionChangesCount: 0,
+        killCount: 0,
       };
 
       expect(canCounterKill(player)).toBe(true);
@@ -159,6 +178,8 @@ describe("Game Logic", () => {
         mission: "Mission A",
         isEliminated: false,
         lastCounterKillTime: now - 10 * 60 * 1000, // 10 minutes ago
+        missionChangesCount: 0,
+        killCount: 0,
       };
 
       expect(canCounterKill(player)).toBe(false);
@@ -175,6 +196,8 @@ describe("Game Logic", () => {
         mission: "Mission A",
         isEliminated: false,
         lastCounterKillTime: now - 21 * 60 * 1000, // 21 minutes ago
+        missionChangesCount: 0,
+        killCount: 0,
       };
 
       expect(canCounterKill(player)).toBe(true);
@@ -191,6 +214,8 @@ describe("Game Logic", () => {
           mission: "Mission A",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -199,6 +224,8 @@ describe("Game Logic", () => {
           mission: "Mission B",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -214,6 +241,8 @@ describe("Game Logic", () => {
           mission: "Mission A",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -222,6 +251,8 @@ describe("Game Logic", () => {
           mission: "Mission B",
           isEliminated: true,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-3",
@@ -230,6 +261,8 @@ describe("Game Logic", () => {
           mission: "Mission C",
           isEliminated: true,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -252,6 +285,8 @@ describe("Game Logic", () => {
         expect(player.targetId).not.toBeNull();
         expect(player.mission).not.toBeNull();
         expect(player.isEliminated).toBe(false);
+        expect(player.missionChangesCount).toBe(0);
+        expect(player.killCount).toBe(0);
       }
     });
 
@@ -282,6 +317,8 @@ describe("Game Logic", () => {
           mission: "Mission A",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -290,6 +327,8 @@ describe("Game Logic", () => {
           mission: "Mission B",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-3",
@@ -298,6 +337,8 @@ describe("Game Logic", () => {
           mission: "Mission C",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -311,6 +352,7 @@ describe("Game Logic", () => {
       const defender = result.find((p) => p.id === "player-1");
       expect(defender?.targetId).toBe("player-1"); // La cible de Bob était Alice
       expect(defender?.mission).toBe("Mission B");
+      expect(defender?.killCount).toBe(1);
 
       // Vérifier que le timestamp du contre-kill a été mis à jour
       expect(defender?.lastCounterKillTime).toBe(now);
@@ -328,6 +370,8 @@ describe("Game Logic", () => {
           mission: "Mission A",
           isEliminated: false,
           lastCounterKillTime: now - 10 * 60 * 1000, // Il y a 10 minutes
+          missionChangesCount: 0,
+          killCount: 0,
         },
         {
           id: "player-2",
@@ -336,6 +380,8 @@ describe("Game Logic", () => {
           mission: "Mission B",
           isEliminated: false,
           lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
         },
       ];
 
@@ -343,6 +389,140 @@ describe("Game Logic", () => {
 
       // Aucun changement ne devrait être apporté
       expect(result).toEqual(players);
+    });
+  });
+
+  describe("Mission Change", () => {
+    test("canChangeMission should return true for eligible player", () => {
+      const player: Player = {
+        id: "player-1",
+        name: "Alice",
+        targetId: "player-2",
+        mission: "Mission A",
+        isEliminated: false,
+        lastCounterKillTime: null,
+        missionChangesCount: 0,
+        killCount: 0,
+      };
+
+      expect(canChangeMission(player)).toBe(true);
+    });
+
+    test("canChangeMission should return false for eliminated player", () => {
+      const player: Player = {
+        id: "player-1",
+        name: "Alice",
+        targetId: "player-2",
+        mission: "Mission A",
+        isEliminated: true,
+        lastCounterKillTime: null,
+        missionChangesCount: 0,
+        killCount: 0,
+      };
+
+      expect(canChangeMission(player)).toBe(false);
+    });
+
+    test("canChangeMission should return false for player with max changes", () => {
+      const player: Player = {
+        id: "player-1",
+        name: "Alice",
+        targetId: "player-2",
+        mission: "Mission A",
+        isEliminated: false,
+        lastCounterKillTime: null,
+        missionChangesCount: 2,
+        killCount: 0,
+      };
+
+      expect(canChangeMission(player)).toBe(false);
+    });
+
+    test("canChangeMission should return false for player with kills", () => {
+      const player: Player = {
+        id: "player-1",
+        name: "Alice",
+        targetId: "player-2",
+        mission: "Mission A",
+        isEliminated: false,
+        lastCounterKillTime: null,
+        missionChangesCount: 0,
+        killCount: 1,
+      };
+
+      expect(canChangeMission(player)).toBe(false);
+    });
+
+    test("changeMission should not allow change if player has kills", () => {
+      const players: Player[] = [
+        {
+          id: "player-1",
+          name: "Alice",
+          targetId: "player-2",
+          mission: "Mission A",
+          isEliminated: false,
+          lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 1,
+        },
+        {
+          id: "player-2",
+          name: "Bob",
+          targetId: "player-1",
+          mission: "Mission B",
+          isEliminated: false,
+          lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
+        },
+      ];
+
+      const missions = [
+        { id: "1", description: "Mission A" },
+        { id: "2", description: "Mission B" },
+        { id: "3", description: "Mission C" },
+      ];
+
+      const result = changeMission(players, "player-1", missions);
+      expect(result).toBeNull();
+    });
+
+    test("changeMission should not assign mission already taken by another player", () => {
+      const players: Player[] = [
+        {
+          id: "player-1",
+          name: "Alice",
+          targetId: "player-2",
+          mission: "Mission A",
+          isEliminated: false,
+          lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
+        },
+        {
+          id: "player-2",
+          name: "Bob",
+          targetId: "player-1",
+          mission: "Mission B",
+          isEliminated: false,
+          lastCounterKillTime: null,
+          missionChangesCount: 0,
+          killCount: 0,
+        },
+      ];
+
+      const missions = [
+        { id: "1", description: "Mission A" },
+        { id: "2", description: "Mission B" },
+        { id: "3", description: "Mission C" },
+      ];
+
+      const result = changeMission(players, "player-1", missions);
+      expect(result).not.toBeNull();
+      if (result) {
+        const updatedPlayer = result.find((p) => p.id === "player-1");
+        expect(updatedPlayer?.mission).toBe("Mission C");
+      }
     });
   });
 });
