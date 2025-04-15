@@ -5,6 +5,7 @@ export interface Player {
   mission: string | null;
   isEliminated: boolean;
   lastCounterKillTime: number | null;
+  missionChangesCount: number;
 }
 
 export interface GameState {

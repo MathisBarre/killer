@@ -9,6 +9,7 @@ import {
   checkGameCompletion,
   generateMissions,
   createPlayer,
+  changeMission,
 } from "../core/gameLogic";
 
 // État initial du jeu
@@ -126,6 +127,20 @@ export const useGameStore = create<GameStateStore>()(
       getRemainingPlayers: (): Player[] => {
         return get().players.filter((p) => !p.isEliminated);
       },
+
+      changeMission: (playerId: string) => {
+        set((state) => {
+          const missions = generateMissions();
+          const updatedPlayers = changeMission(
+            state.players,
+            playerId,
+            missions
+          );
+          if (updatedPlayers) {
+            state.players = updatedPlayers;
+          }
+        });
+      },
     })),
     {
       name: "killer-game-storage",
@@ -144,6 +159,7 @@ interface GameStateStore extends GameState {
   startGame: () => void;
   eliminatePlayer: (eliminatorId: string, targetId: string) => void;
   performCounterKill: (defenderId: string, attackerId: string) => void;
+  changeMission: (playerId: string) => void;
 
   // Sélecteurs
   getPlayerById: (id: string) => Player | undefined;

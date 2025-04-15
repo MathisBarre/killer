@@ -19,6 +19,7 @@ export const createPlayer = (name: string): Player => {
     mission: null,
     isEliminated: false,
     lastCounterKillTime: null,
+    missionChangesCount: 0,
   };
 };
 
@@ -198,4 +199,42 @@ export const initializeGame = (playerNames: string[]): GameState => {
     players: playersWithTargets,
     winner: null,
   };
+};
+
+/**
+ * Change a player's mission if allowed
+ * @returns updated players array if mission was changed, null otherwise
+ */
+export const changeMission = (
+  players: Player[],
+  playerId: string,
+  missions: Mission[]
+): Player[] | null => {
+  const player = players.find((p) => p.id === playerId);
+  if (!player || player.isEliminated || player.missionChangesCount >= 2) {
+    return null;
+  }
+
+  // Find a new random mission that's different from the current one
+  const availableMissions = missions.filter(
+    (m) => m.description !== player.mission
+  );
+  if (availableMissions.length === 0) {
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * availableMissions.length);
+  const newMission = availableMissions[randomIndex];
+
+  // Update the player's mission and increment the change counter
+  return players.map((p) => {
+    if (p.id === playerId) {
+      return {
+        ...p,
+        mission: newMission.description,
+        missionChangesCount: p.missionChangesCount + 1,
+      };
+    }
+    return p;
+  });
 };

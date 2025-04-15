@@ -26,6 +26,7 @@ export const PlayerDetails = ({
     eliminatePlayer,
     performCounterKill,
     players,
+    changeMission,
   } = useGameStore();
 
   const player = getPlayerById(playerId);
@@ -129,6 +130,20 @@ export const PlayerDetails = ({
                 {player.mission ? (
                   <div className="bg-blue-50 p-4 rounded-lg">
                     <p>{player.mission}</p>
+                    {!player.isEliminated && player.missionChangesCount < 2 && (
+                      <div className="mt-4">
+                        <Button
+                          onClick={() => {
+                            changeMission(player.id);
+                          }}
+                          variant="secondary"
+                          fullWidth
+                        >
+                          Changer de mission ({2 - player.missionChangesCount}{" "}
+                          restants)
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <p className="text-gray-500 italic">Pas de mission</p>
