@@ -77,18 +77,20 @@ export const PlayerDetails = ({
   };
 
   return (
-    <FullScreenContainer>
+    <>
       {!showDetails ? (
         // Vue: boutons de choix
-        <div className="flex flex-col h-full">
+        <FullScreenContainer className="flex flex-col h-full">
           <div className="flex-1 flex flex-col items-center justify-center p-4 bg-blue-600 text-white">
-            <h1 className="text-3xl font-bold mb-2">{player.name}</h1>
-            <p className="text-blue-100 mb-8">Que souhaitez-vous faire ?</p>
+            <div className="flex flex-col items-center justify-center flex-1">
+              <h1 className="text-3xl font-bold">{player.name}</h1>
+              <p className="text-blue-100 mb-8">Que souhaitez-vous faire ?</p>
+            </div>
             <Button
               onClick={() => setShowDetails(true)}
               variant="secondary"
               fullWidth
-              className="py-6 mb-4 text-xl"
+              className="text-xl flex-1"
             >
               Voir mes informations
             </Button>
@@ -101,7 +103,7 @@ export const PlayerDetails = ({
           >
             Retour à la liste
           </Button>
-        </div>
+        </FullScreenContainer>
       ) : (
         // Vue: détails du joueur
         <div className="flex-1 flex flex-col p-4">
@@ -226,6 +228,6 @@ export const PlayerDetails = ({
           </div>
         </div>
       )}
-    </FullScreenContainer>
+    </>
   );
 };

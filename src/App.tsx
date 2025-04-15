@@ -62,7 +62,6 @@ function App() {
           <PlayerList
             onSelectPlayer={handleSelectPlayer}
             onResetGame={handleResetGame}
-            onBack={() => setCurrentScreen("setup")}
           />
         )}
 

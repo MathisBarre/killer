@@ -1,18 +1,16 @@
 import { FullScreenContainer } from "./FullScreenContainer";
 import { Button } from "./Button";
 import { useGameStore } from "../store/gameStore";
-import { ArrowLeftIcon, PlusIcon, StopIcon } from "@heroicons/react/16/solid";
+import { PlusIcon, StopIcon } from "@heroicons/react/16/solid";
 
 interface PlayerListProps {
   onSelectPlayer: (playerId: string) => void;
   onResetGame: () => void;
-  onBack: () => void;
 }
 
 export const PlayerList = ({
   onSelectPlayer,
   onResetGame,
-  onBack,
 }: PlayerListProps) => {
   const { players, winner, status } = useGameStore();
 
@@ -25,13 +23,6 @@ export const PlayerList = ({
     <FullScreenContainer>
       {/* Header */}
       <div className="p-4 bg-gray-50 shadow-sm relative">
-        <button
-          onClick={onBack}
-          className="text-gray-600 hover:text-gray-800 flex items-center gap-2 absolute top-1/2 -translate-y-1/2 left-4 bg-white rounded-full p-2 shadow-sm"
-          aria-label="Retour"
-        >
-          <ArrowLeftIcon className="h-5 w-5" />
-        </button>
         <h1 className="text-2xl font-bold text-center">Joueurs</h1>
 
         {!isGameCompleted && (
@@ -45,7 +36,7 @@ export const PlayerList = ({
                 onResetGame();
               }
             }}
-            className="flex items-center absolute top-1/2 -translate-y-1/2 right-4 bg-red-600 text-white hover:bg-red-700 active:bg-red-800 p-2 rounded-full gap-2"
+            className="flex items-center absolute top-1/2 -translate-y-1/2 left-4 bg-red-600 text-white hover:bg-red-700 active:bg-red-800 p-2 rounded-full gap-2"
           >
             <>
               <StopIcon className="h-5 w-5" />
