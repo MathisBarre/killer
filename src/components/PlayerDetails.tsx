@@ -45,19 +45,34 @@ export const PlayerDetails = ({
 
   const handleEliminateTarget = () => {
     if (player && target) {
-      eliminatePlayer(player.id, target.id);
-      onEliminate();
+      if (
+        window.confirm(
+          `Êtes-vous sûr d'avoir réussi à éliminer ${target.name} ?`
+        )
+      ) {
+        eliminatePlayer(player.id, target.id);
+        onEliminate();
+      }
     }
   };
 
   const handleCounterKill = (attackerId: string) => {
     if (player) {
+      const attacker = players.find((p) => p.id === attackerId);
+      if (!attacker) return;
+
       const canPerformCounterKill = canCounterKill(player);
       setCounterKillAttempted(true);
 
       if (canPerformCounterKill) {
-        performCounterKill(player.id, attackerId);
-        onEliminate();
+        if (
+          window.confirm(
+            `Êtes-vous sûr d'avoir contre-assassiné ${attacker.name} ?`
+          )
+        ) {
+          performCounterKill(player.id, attackerId);
+          onEliminate();
+        }
       }
     }
   };
@@ -136,7 +151,13 @@ export const PlayerDetails = ({
                       <div className="mt-4">
                         <Button
                           onClick={() => {
-                            changeMission(player.id);
+                            if (
+                              window.confirm(
+                                `Êtes-vous sûr de vouloir changer de mission ?`
+                              )
+                            ) {
+                              changeMission(player.id);
+                            }
                           }}
                           variant="secondary"
                           fullWidth
