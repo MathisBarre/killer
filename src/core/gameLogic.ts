@@ -117,6 +117,7 @@ export const eliminateTarget = (
         ...player,
         targetId: target.targetId,
         mission: target.mission,
+        killCount: player.killCount + 1,
       };
     }
     return player;
