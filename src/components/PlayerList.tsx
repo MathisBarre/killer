@@ -119,8 +119,7 @@ export const PlayerList = ({
               }
             }}
             variant="primary"
-            fullWidth
-            className="flex items-center justify-center shadow-sm"
+            className="flex items-center justify-center shadow-sm w-full"
           >
             <PlusIcon className="h-5 w-5 mr-2" />
             Nouvelle partie

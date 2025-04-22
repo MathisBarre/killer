@@ -36,7 +36,7 @@ export const PlayerDetails = ({
     return (
       <Container className="text-center">
         <h1 className="text-2xl font-bold mb-4">Joueur non trouvé</h1>
-        <Button onClick={onBack} variant="secondary" fullWidth>
+        <Button onClick={onBack} variant="secondary" className="w-full">
           Retour
         </Button>
       </Container>
@@ -104,8 +104,7 @@ export const PlayerDetails = ({
             <Button
               onClick={() => setShowDetails(true)}
               variant="secondary"
-              fullWidth
-              className="text-xl flex-1"
+              className="text-xl flex-1 w-full"
             >
               Voir mes informations
             </Button>
@@ -113,8 +112,7 @@ export const PlayerDetails = ({
           <Button
             onClick={onBack}
             variant="secondary"
-            fullWidth
-            className="rounded-none py-6 text-xl"
+            className="rounded-none py-6 text-xl w-full"
           >
             Retour à la liste
           </Button>
@@ -160,7 +158,7 @@ export const PlayerDetails = ({
                             }
                           }}
                           variant="secondary"
-                          fullWidth
+                          className="w-full"
                         >
                           Changer de mission ({2 - player.missionChangesCount}{" "}
                           restants)
@@ -178,7 +176,7 @@ export const PlayerDetails = ({
                   <Button
                     onClick={handleEliminateTarget}
                     variant="success"
-                    fullWidth
+                    className="w-full"
                   >
                     J'ai éliminé ma cible
                   </Button>
@@ -242,7 +240,7 @@ export const PlayerDetails = ({
                 onBack();
               }}
               variant="secondary"
-              fullWidth
+              className="w-full"
             >
               Cacher mes informations
             </Button>

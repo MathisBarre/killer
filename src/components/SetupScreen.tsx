@@ -145,8 +145,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
           <Button
             onClick={handleAddPlayer}
             variant="secondary"
-            fullWidth
-            className="flex items-center justify-center bg-white hover:bg-gray-50 shadow-sm"
+            className="w-full flex items-center justify-center bg-white hover:bg-gray-50 shadow-sm"
           >
             <PlusIcon className="h-5 w-5 mr-2" />
             Ajouter un joueur
@@ -155,8 +154,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
           <Button
             onClick={handleStartGame}
             disabled={players.length < 2}
-            fullWidth
-            className="flex items-center justify-center shadow-sm"
+            className="w-full flex items-center justify-center shadow-sm"
           >
             <PlayIcon className="h-5 w-5 mr-2" />
             Commencer la partie
