@@ -70,3 +70,10 @@ Intégration avec Vercel Analytics pour le suivi des performances et des utilisa
 ## 🤝 Contribution
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+
+## Idées d'améliorations
+
+- Missions spécifiques à un contexte (ex: mariage)
+- Options pour faire changer de mission à chaque kill (pour éviter les contre-kills)
+- Possibilité de créer ses missions
+- Ajouter des missions bonus pour les groupes (pas de kill, juste des missions pour encourager l'organisation d'activités)
