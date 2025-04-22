@@ -5,13 +5,11 @@ type ButtonVariant = "primary" | "secondary" | "danger" | "success";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: ButtonVariant;
-  fullWidth?: boolean;
 }
 
 export const Button = ({
   children,
   variant = "primary",
-  fullWidth = false,
   className = "",
   ...props
 }: ButtonProps) => {
@@ -25,11 +23,9 @@ export const Button = ({
     success: "bg-green-600 text-white hover:bg-green-700 active:bg-green-800",
   };
 
-  const widthClasses = fullWidth ? "w-full" : "";
-
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${widthClasses} ${className}`}
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}

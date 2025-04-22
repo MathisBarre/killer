@@ -41,7 +41,7 @@ function App() {
 
   const handleResetGame = () => {
     resetGame();
-    setCurrentScreen("landing");
+    setCurrentScreen("setup");
   };
 
   return (

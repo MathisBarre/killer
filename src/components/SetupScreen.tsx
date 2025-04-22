@@ -3,7 +3,12 @@ import { Button } from "./Button";
 import { TextField } from "./TextField";
 import { useGameStore } from "../store/gameStore";
 import { FullScreenContainer } from "./FullScreenContainer";
-import { ArrowLeftIcon, PlusIcon, PlayIcon } from "@heroicons/react/16/solid";
+import {
+  ArrowLeftIcon,
+  PlusIcon,
+  PlayIcon,
+  TrashIcon,
+} from "@heroicons/react/16/solid";
 
 interface SetupScreenProps {
   onStartGame: () => void;
@@ -15,7 +20,8 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { players, addPlayer, removePlayer, startGame } = useGameStore();
+  const { players, addPlayer, removePlayer, startGame, resetPlayers } =
+    useGameStore();
 
   const handleAddPlayer = () => {
     const trimmedName = playerName.trim();
@@ -82,7 +88,17 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
 
       {/* Main content with scroll */}
       <div className="flex-1 overflow-y-auto p-4 bg-white flex flex-col">
-        <h2 className="text-xl font-medium mb-3">Joueurs ({players.length})</h2>
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-xl font-medium">Joueurs ({players.length})</h2>
+          <Button
+            onClick={resetPlayers}
+            variant="secondary"
+            className="flex items-center justify-center bg-white hover:bg-red-50 text-red-600 hover:text-red-700 shadow-sm"
+            disabled={players.length === 0}
+          >
+            <TrashIcon className="h-5 w-5" />
+          </Button>
+        </div>
         <div className="flex-1 overflow-y-auto flex justify-center items-center">
           {players.length === 0 && (
             <p className="text-gray-500 italic text-center py-4 ">
@@ -135,6 +151,7 @@ export const SetupScreen = ({ onStartGame, onBack }: SetupScreenProps) => {
             <PlusIcon className="h-5 w-5 mr-2" />
             Ajouter un joueur
           </Button>
+
           <Button
             onClick={handleStartGame}
             disabled={players.length < 2}

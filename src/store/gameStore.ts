@@ -29,7 +29,17 @@ export const useGameStore = create<GameStateStore>()(
 
       // Actions
       resetGame: () => {
-        set(initialState);
+        set((state) => {
+          state.status = initialState.status;
+          state.winner = initialState.winner;
+          // Keep players list
+        });
+      },
+
+      resetPlayers: () => {
+        set((state) => {
+          state.players = [];
+        });
       },
 
       setStatus: (status) => {
@@ -153,6 +163,7 @@ export const useGameStore = create<GameStateStore>()(
 interface GameStateStore extends GameState {
   // Actions pour manipuler l'état
   resetGame: () => void;
+  resetPlayers: () => void;
   setStatus: (status: GameState["status"]) => void;
   addPlayer: (name: string) => void;
   removePlayer: (id: string) => void;
