@@ -1,12 +1,8 @@
 import { Mission } from "../models/types";
 
+// prettier-ignore
 export const MISSION_LIST: Mission[] = [
   { id: "1", description: "Faire porter quelque chose de ridicule à la cible" },
-  { id: "2", description: "Faire chanter la cible une chanson complète" },
-  {
-    id: "3",
-    description: "Faire danser la cible brièvement",
-  },
   {
     id: "4",
     description: "Faire dire à la cible 'Je suis un pingouin' trois fois",
@@ -16,16 +12,9 @@ export const MISSION_LIST: Mission[] = [
     description: "Faire prendre une pose ridicule à la cible pour une photo",
   },
   { id: "6", description: "Faire imiter un animal à la cible" },
-  { id: "7", description: "Faire raconter une blague à la cible" },
-  { id: "8", description: "Faire faire 10 sauts à la cible" },
-  { id: "9", description: "Faire réciter l'alphabet à l'envers à la cible" },
   {
     id: "10",
     description: "Faire tenir la cible sur un pied jusqu'à perdre l'équilibre",
-  },
-  {
-    id: "11",
-    description: "Faire dessiner un portrait de toi les yeux fermés",
   },
   {
     id: "12",
@@ -40,15 +29,14 @@ export const MISSION_LIST: Mission[] = [
     description: "Faire parler avec un accent étranger",
   },
   { id: "15", description: "Faire manger une combinaison d'aliments étrange" },
-  { id: "16", description: "Faire faire plusieurs tours sur soi-même" },
-  { id: "17", description: "Faire réciter un poème improvisé en rimes" },
+  { id: "16", description: "Faire faire au moins 3 tours sur soi-même" },
+  { id: "17", description: "Faire réciter une chanson ou un poème improvisé" },
   { id: "18", description: "Faire faire une imitation de célébrité" },
   {
     id: "19",
     description: "Faire chanter une chanson en changeant les paroles",
   },
   { id: "20", description: "Faire faire un parcours d'obstacles improvisé" },
-  { id: "21", description: "Faire faire une danse de la victoire" },
   {
     id: "22",
     description: "Faire faire un discours improvisé sur un sujet aléatoire",
@@ -56,11 +44,6 @@ export const MISSION_LIST: Mission[] = [
   { id: "23", description: "Faire faire une pose de yoga inventée" },
   { id: "24", description: "Faire marcher comme un robot" },
   { id: "25", description: "Faire raconter une histoire effrayante" },
-  {
-    id: "26",
-    description:
-      "Faire jouer à pierre-feuille-ciseaux jusqu'à perdre trois fois",
-  },
   { id: "27", description: "Faire dessiner avec la main non dominante" },
   { id: "28", description: "Faire parler en rimant pendant un moment" },
   {
@@ -101,9 +84,8 @@ export const MISSION_LIST: Mission[] = [
     id: "42",
     description: "Faire faire une publicité pour un objet ordinaire",
   },
-  { id: "43", description: "Faire marcher en arrière" },
   { id: "44", description: "Faire faire un bulletin météo imaginaire" },
-  { id: "45", description: "Faire parler sans utiliser la lettre 'e'" },
+  { id: "45", description: "Faire parler sans utiliser une lettre" },
   {
     id: "46",
     description: "Faire faire une chorégraphie sur une chanson de ton choix",
@@ -153,11 +135,6 @@ export const MISSION_LIST: Mission[] = [
   { id: "59", description: "Faire porter des vêtements à l'envers" },
   { id: "60", description: "Faire faire une imitation d'un animal en colère" },
   {
-    id: "61",
-    description:
-      "Faire réciter une comptine en changeant toutes les voyelles par 'i'",
-  },
-  {
     id: "62",
     description: "Faire faire une interview imaginaire avec une célébrité",
   },
@@ -186,7 +163,6 @@ export const MISSION_LIST: Mission[] = [
     id: "71",
     description: "Faire raconter une histoire où la cible est le héros",
   },
-  { id: "72", description: "Faire faire quelques exercices de fitness" },
   {
     id: "73",
     description: "Faire parler en doublant la première syllabe de chaque mot",
@@ -209,7 +185,6 @@ export const MISSION_LIST: Mission[] = [
     id: "82",
     description: "Faire faire une publicité pour un produit imaginaire",
   },
-  { id: "83", description: "Faire faire une démonstration de lip sync battle" },
   { id: "84", description: "Faire faire une imitation d'un membre du groupe" },
   { id: "85", description: "Faire faire une démonstration de yoga du rire" },
   { id: "86", description: "Faire faire une imitation d'un animal mignon" },
